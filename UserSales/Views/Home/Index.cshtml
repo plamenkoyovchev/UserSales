@@ -1,0 +1,115 @@
+﻿@model IEnumerable<UserSales.Models.UserViewModel>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "User Sales";
+}
+
+<div class="row">
+    <div class="col-md-6">
+
+        @Html.Grid(Model).Columns(columns =>
+           {
+               columns.Add(x => x.FirstName).Titled("First name").SetWidth(110).Sortable(true);
+               columns.Add(x => x.LastName).Titled("Last name").SetWidth(110).Sortable(true);
+               columns.Add(x => x.Email).Titled("Email").SetWidth(110).Sortable(true);
+               columns.Add()
+                .Titled("Actions")
+                .RenderValueAs(o =>  @<button class="btn label label-info compare" data-id="@o.Id">Compare</button>)
+                                                                                       .Encoded(false)
+                                                                                       .Sanitized(false);
+           }).WithPaging(10)
+
+    </div>
+    <div class="col-md-6">
+        <div id="example">
+            <div class="demo-section k-content">
+                <div id="chart"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    @Html.ActionLink("Initialize","InitDb","Home", null, new {@class="btn btn-primary" })
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        var data = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "@Url.Action("GetSalesVolume", "Home")",
+                    dataType: "json"
+                }
+            },
+            sort: {
+                field: "Volume",
+                dir: "desc"
+            }
+        });
+
+        var viewModel = kendo.observable({
+            isVisible: true,
+            dataSource: data
+        });
+
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: data,
+                title: {
+                    text: "TOP 10 Sales volume"
+                },
+                legend: {
+                    position: "top"
+                },
+                seriesDefaults: {
+                    type: "bar"
+                },
+                series: [{
+                    field: "Volume",
+                    colorField: "UserColor"
+                }],
+                categoryAxis: {
+                    field: "Email",
+                    majorGridLines: {
+                        visible: false
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "N0"
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            createChart();
+            $("button.compare").on('click', function () {
+                var id = $(this).data('id');
+
+                $.ajax({
+                    dataType: "json",
+                    method: "GET",
+                    cache: false,
+                    url: '@Url.Action("GetUserSalesVolume")',
+                    data: { id: id }
+                })
+                .done(function (sales) {
+                    if (sales) {
+                        data.add({ "Email": sales.Email, "Volume": sales.Volume, "UserColor": "#FF0000" });
+                    }
+                });
+            });
+        });
+
+        $(document).bind($("#chart"), viewModel);
+        $(document).bind("kendo:skinChange", createChart);
+
+        data.add({ "Email": "plamen@plamen.com", "Volume": 3000, "UserColor": "#FF0000" });
+    </script>
+}

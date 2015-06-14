@@ -1,0 +1,10 @@
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\bin\Debug\UserSales.Data.dll.config
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\bin\Debug\UserSales.Data.dll
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\bin\Debug\UserSales.Data.pdb
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\bin\Debug\EntityFramework.dll
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\bin\Debug\EntityFramework.xml
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\obj\Debug\UserSales.Data.csprojResolveAssemblyReference.cache
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\obj\Debug\UserSales.Data.dll
+C:\Users\Plamen\Documents\Visual Studio 2015\Projects\UserSales\UserSales.Data\obj\Debug\UserSales.Data.pdb
